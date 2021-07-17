@@ -11,59 +11,69 @@ E.	Si el importe final con descuento suma más de $120  se debe sumar un 10% de 
  ”Usted pago X de IIBB.”, siendo X el impuesto que se pagó. 
 
  */
-function CalcularPrecio() 
-{
+function CalcularPrecio() {
     //declaro vars    
     let cantidadLamparas;
     let precioNeto;
-    let precioBruto;
+    let precioSinDescuento;
     let marcaLampara;
-    let porcentaje;
+    let porcentajeDescuento;
+    let impuesto;
 
     //ingreso de datos
-    precioBruto = 35;
-    porcentaje = 0;
+    precioSinDescuento = 35;
+    porcentajeDescuento = 0;
     cantidadLamparas = parseInt(document.getElementById("txtIdCantidad").value);
     marcaLampara = document.getElementById("Marca").value;
 
     //condiciones
     if (cantidadLamparas > 5) //A
     {
-        porcentaje = 50;
-    }
+        porcentajeDescuento = 50;
+    } //fin de condicion mayor A 5
     else {
         if (cantidadLamparas == 5) //B
         {
             if (marcaLampara == "ArgentinaLuz") {
-                porcentaje = 40;
+                porcentajeDescuento = 40;
             }
             else {
-                porcentaje = 30;
+                porcentajeDescuento = 30;
             }
 
-        }
-        else {
+        }//Fin de condicion igual a 5
+        else 
+        {
             if (cantidadLamparas == 4) //C
             {
-                if (marcaLampara == "FelipeLamparas" || marcaLampara == "ArgentinaLuz") {
-                    porcentaje = 25;
+                if (marcaLampara == "FelipeLamparas" || marcaLampara == "ArgentinaLuz") 
+                {
+                    porcentajeDescuento = 25;
                 }
-                else {
-                    porcentaje = 20;
+                else 
+                {
+                    porcentajeDescuento = 20;
 
                 }
-            }
-            if (cantidadLamparas == 3) //D
+            }//Fin de condicion igual a 4
+            else 
             {
-                if (marcaLampara == "ArgentinaLuz") {
-                    porcentaje = 15;
-                }
-                else {
-                    if (marcaLampara == "FelipeLamparas") {
-                        porcentaje = 10;
+                if (cantidadLamparas == 3) //D
+                {
+                    if (marcaLampara == "ArgentinaLuz") 
+                    {
+                        porcentajeDescuento = 15;
                     }
-                    else {
-                        porcentaje = 5;
+                    else 
+                    {
+                        if (marcaLampara == "FelipeLamparas") 
+                        {
+                            porcentajeDescuento = 10;
+                        }
+                        else 
+                        {
+                            porcentajeDescuento = 5;
+                        }//fin de condicion igual a 3
                     }
                 }
             }
@@ -71,14 +81,16 @@ function CalcularPrecio()
     }
 
     //calculo precio
-    precioNeto = (precioBruto - (precioBruto * porcentaje / 100)) * cantidadLamparas;
+    precioNeto = (precioSinDescuento - (precioSinDescuento * porcentajeDescuento / 100)) * cantidadLamparas;
 
     //calculo de IIBB. Para mas de $120, suma 10%
-    if (precioNeto > 120) 
-    {
-        precioNeto = (precioNeto + (precioNeto * 10 / 100));
+    if (precioNeto > 120) {
+        impuesto = precioNeto * 10 / 100;
+        precioNeto = precioNeto + impuesto;
+        alert("\"Usted pago $" + precioNeto + " de IIBB.\"" + ", siendo $" + impuesto + " el impuesto que se pagó.");
     }
 
     //asigno precio final a box html
     document.getElementById("txtIdprecioDescuento").value = precioNeto
+
 }
