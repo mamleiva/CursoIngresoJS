@@ -19,6 +19,7 @@ function CalcularPrecio() {
     let marcaLampara;
     let porcentajeDescuento;
     let impuesto;
+    
 
     //ingreso de datos
     precioSinDescuento = 35;
@@ -27,58 +28,61 @@ function CalcularPrecio() {
     marcaLampara = document.getElementById("Marca").value;
 
     //condiciones
+    
+    /*
     if (cantidadLamparas > 5) //A
     {
         porcentajeDescuento = 50;
     } //fin de condicion mayor A 5
-    else {
-        if (cantidadLamparas == 5) //B
-        {
-            if (marcaLampara == "ArgentinaLuz") {
-                porcentajeDescuento = 40;
-            }
-            else {
-                porcentajeDescuento = 30;
-            }
+    else 
+    */
+    
+    {     
+        switch (cantidadLamparas){  
+            case 5: //B
+                if (marcaLampara == "ArgentinaLuz") {
+                    porcentajeDescuento = 40;                                        
+                }
+                else
+                {
+                    porcentajeDescuento = 30;
+                }
+            break;      //Fin de B
 
-        }//Fin de condicion igual a 5
-        else 
-        {
-            if (cantidadLamparas == 4) //C
-            {
-                if (marcaLampara == "FelipeLamparas" || marcaLampara == "ArgentinaLuz") 
-                {
-                    porcentajeDescuento = 25;
+            case 4: //C
+                if (marcaLampara == "FelipeLamparas" || marcaLampara == "ArgentinaLuz") {
+                    porcentajeDescuento = 25;                    
                 }
-                else 
+                else
                 {
-                    porcentajeDescuento = 20;
+                    porcentajeDescuento = 20;  
+                }
+            break;  //Fin de C
 
+            case 3: //D
+                if (marcaLampara == "ArgentinaLuz") {
+                    porcentajeDescuento = 15;                    
                 }
-            }//Fin de condicion igual a 4
-            else 
-            {
-                if (cantidadLamparas == 3) //D
+                else
                 {
-                    if (marcaLampara == "ArgentinaLuz") 
-                    {
-                        porcentajeDescuento = 15;
+                    if (marcaLampara == "FelipeLamparas") {
+                        porcentajeDescuento = 10;
                     }
-                    else 
+                    else
                     {
-                        if (marcaLampara == "FelipeLamparas") 
-                        {
-                            porcentajeDescuento = 10;
-                        }
-                        else 
-                        {
-                            porcentajeDescuento = 5;
-                        }//fin de condicion igual a 3
+                        porcentajeDescuento = 5;  
                     }
-                }
-            }
-        }
-    }
+                }                
+            break;  //Fin de D
+            default:
+                if (cantidadLamparas > 5) //A
+                {
+                    porcentajeDescuento = 50;
+                } //fin de condicion mayor A 5
+            break;
+
+        }  
+    } 
 
     //calculo precio
     precioNeto = (precioSinDescuento - (precioSinDescuento * porcentajeDescuento / 100)) * cantidadLamparas;
@@ -87,7 +91,7 @@ function CalcularPrecio() {
     if (precioNeto > 120) {
         impuesto = precioNeto * 10 / 100;
         precioNeto = precioNeto + impuesto;
-        alert("\"Usted pago $" + precioNeto + " de IIBB.\"" + ", siendo $" + impuesto + " el impuesto que se pagó.");
+        alert("IIBB.Usted pago \"$" + precioNeto + "\", siendo $" + impuesto + " el impuesto que se pagó.");
     }
 
     //asigno precio final a box html
